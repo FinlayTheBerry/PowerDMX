@@ -24,8 +24,8 @@ static constexpr uint16_t USB_PID_ETC_Gadget_2 = 0x0114;
 static constexpr uint16_t USB_PID_ETC_Gadget_2_CPU2 = 0x011C;
 static constexpr uint8_t USB_HID_Interface_Number = 0x00;
 static constexpr uint8_t USB_Bulk_Interface_Number = 0x01;
-static constexpr uint8_t USB_HID_Out_Endpoint_Number = 0x01;
-static constexpr uint8_t USB_HID_In_Endpoint_Number = 0x81;
+static constexpr uint8_t __attribute__((unused)) USB_HID_Out_Endpoint_Number = 0x01;
+static constexpr uint8_t __attribute__((unused)) USB_HID_In_Endpoint_Number = 0x81;
 static constexpr uint8_t USB_Bulk_Out_Endpoint_Number = 0x02;
 static constexpr uint8_t USB_Bulk_In_Endpoint_Number = 0x82;
 

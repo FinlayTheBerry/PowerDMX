@@ -1,7 +1,3 @@
-build/*
-!build/build.*
-!build/vscode*
-libusb_git/
-musl/
-obj/
-bin/
+/bin/
+/obj/
+/lib/

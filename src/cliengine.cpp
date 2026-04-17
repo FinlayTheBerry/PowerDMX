@@ -397,24 +397,6 @@ std::string CliEngine::SetDmxState_Command(const std::vector<std::string> &args)
     PowerDmx::SetDmxState(*connectionId, *universe, *dmxState);
     return "";
 }
-std::string CliEngine::GetSerialNumber_Command(const std::vector<std::string> &args)
-{
-    if (args.size() < 1)
-    {
-        throw std::runtime_error("No value provided for required argument connectionId.");
-    }
-    std::optional<uint32_t> connectionId = ParseUInt(args[0]);
-    if (!connectionId)
-    {
-        throw std::runtime_error("The type of connectionId was invalid. It must be an unsigned int.");
-    }
-    if (args.size() > 1)
-    {
-        throw std::runtime_error("Too many arguments provided. GetSerialNumber takes 0 arguments.");
-    }
-    uint32_t output = PowerDmx::GetSerialNumber(*connectionId);
-    return FormatUInt(output);
-}
 std::string CliEngine::Exit_Command(const std::vector<std::string> &args)
 {
     if (args.size() > 0)
