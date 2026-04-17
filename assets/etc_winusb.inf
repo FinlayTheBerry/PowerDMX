@@ -1,0 +1,563 @@
+;
+; Associates our WinUSB devices with the built in Windows WinUsb driver.
+;
+
+[Version]
+Signature = "$Windows NT$"
+Class     = USB
+ClassGUID = {36FC9E60-C465-11CF-8056-444553540000}
+Provider  = %ManufacturerName%
+CatalogFile = etc_winusb.cat
+DriverVer=07/29/2022,2.0.2
+
+; =================== Strings ===================
+[Strings]
+ManufacturerName="Electronic Theatre Controls, Inc."
+
+Name_VID_14D5_PID_0036="ETC FDU"
+Name_VID_14D5_PID_003C="ETC Cobalt Motor Fader Wing"
+Name_VID_14D5_PID_003D="ETC Eos Motor Fader Wing"
+Name_VID_14D5_PID_0042="ETC Standard Fader Wing"
+Name_VID_14D5_PID_0045="ETC Apex Motor Faders"
+Name_VID_14D5_PID_0046="ETC Apex Haptic Encoders"
+Name_VID_14D5_PID_0047="ETC Apex Intelligent Power"
+Name_VID_14D5_PID_0048="ETC Apex Main Playback"
+Name_VID_14D5_PID_0049="ETC Apex Face Panel"
+Name_VID_14D5_PID_004A="ETC Apex Rackmount Display"
+Name_VID_14D5_PID_004B="ETC Apex Haptic Encoders IMX"
+Name_VID_14D5_PID_004C="ETC Apex Intelligent Power IMX"
+Name_VID_14D5_PID_004D="ETC Apex Main Playback IMX"
+Name_VID_14D5_PID_004E="ETC Eos Main Playback IMX"
+Name_VID_14D5_PID_004F="ETC Eos Main Playback Motorized IMX"
+Name_VID_14D5_PID_0050="ETC Eos Intelligent Power IMX"
+Name_VID_14D5_PID_0051="ETC Eos 6x2 Buttons IMX"
+Name_VID_14D5_PID_0052="ETC Eos Face Panel IMX"
+Name_VID_14D5_PID_0053="ETC Standard Fader Wing IMX"
+Name_VID_14D5_PID_0054="ETC Eos 6x1 Buttons IMX"
+Name_VID_14D5_PID_0055="ETC Element 2 Faders IMX"
+Name_VID_14D5_PID_0112="ETC Gadget"
+Name_VID_14D5_PID_0113="ETC Console I/O HS"
+Name_VID_14D5_PID_0114="ETC Gadget HS"
+Name_VID_14D5_PID_0115="ETC Console I/O 4-Port HS"
+Name_VID_14D5_PID_011B="ETC Console I/O HS IMX"
+Name_VID_14D5_PID_011C="ETC Gadget HS IMX"
+Name_VID_14D5_PID_011D="ETC Console I/O 4-Port HS IMX"
+
+
+; ========== Manufacturer/Models sections ===========
+
+[Manufacturer]
+%ManufacturerName% = DeviceInstall,NTx86,NTamd64
+
+[DeviceInstall.NTx86]
+%Name_VID_14D5_PID_0036% = Install_VID_14D5_PID_0036, USB\VID_14D5&PID_0036&MI_01
+%Name_VID_14D5_PID_003C% = Install_VID_14D5_PID_003C, USB\VID_14D5&PID_003C&MI_01
+%Name_VID_14D5_PID_003D% = Install_VID_14D5_PID_003D, USB\VID_14D5&PID_003D&MI_01
+%Name_VID_14D5_PID_0042% = Install_VID_14D5_PID_0042, USB\VID_14D5&PID_0042&MI_01
+%Name_VID_14D5_PID_0045% = Install_VID_14D5_PID_0045, USB\VID_14D5&PID_0045&MI_01
+%Name_VID_14D5_PID_0046% = Install_VID_14D5_PID_0046, USB\VID_14D5&PID_0046&MI_01
+%Name_VID_14D5_PID_0047% = Install_VID_14D5_PID_0047, USB\VID_14D5&PID_0047&MI_01
+%Name_VID_14D5_PID_0048% = Install_VID_14D5_PID_0048, USB\VID_14D5&PID_0048&MI_01
+%Name_VID_14D5_PID_0049% = Install_VID_14D5_PID_0049, USB\VID_14D5&PID_0049&MI_01
+%Name_VID_14D5_PID_004A% = Install_VID_14D5_PID_004A, USB\VID_14D5&PID_004A&MI_01
+%Name_VID_14D5_PID_004B% = Install_VID_14D5_PID_004B, USB\VID_14D5&PID_004B&MI_01
+%Name_VID_14D5_PID_004C% = Install_VID_14D5_PID_004C, USB\VID_14D5&PID_004C&MI_01
+%Name_VID_14D5_PID_004D% = Install_VID_14D5_PID_004D, USB\VID_14D5&PID_004D&MI_01
+%Name_VID_14D5_PID_004E% = Install_VID_14D5_PID_004E, USB\VID_14D5&PID_004E&MI_01
+%Name_VID_14D5_PID_004F% = Install_VID_14D5_PID_004F, USB\VID_14D5&PID_004F&MI_01
+%Name_VID_14D5_PID_0050% = Install_VID_14D5_PID_0050, USB\VID_14D5&PID_0050&MI_01
+%Name_VID_14D5_PID_0051% = Install_VID_14D5_PID_0051, USB\VID_14D5&PID_0051&MI_01
+%Name_VID_14D5_PID_0052% = Install_VID_14D5_PID_0052, USB\VID_14D5&PID_0052&MI_01
+%Name_VID_14D5_PID_0053% = Install_VID_14D5_PID_0053, USB\VID_14D5&PID_0053&MI_01
+%Name_VID_14D5_PID_0054% = Install_VID_14D5_PID_0054, USB\VID_14D5&PID_0054&MI_01
+%Name_VID_14D5_PID_0055% = Install_VID_14D5_PID_0055, USB\VID_14D5&PID_0055&MI_01
+%Name_VID_14D5_PID_0112% = Install_VID_14D5_PID_0112, USB\VID_14D5&PID_0112&MI_01
+%Name_VID_14D5_PID_0113% = Install_VID_14D5_PID_0113, USB\VID_14D5&PID_0113&MI_01
+%Name_VID_14D5_PID_0114% = Install_VID_14D5_PID_0114, USB\VID_14D5&PID_0114&MI_01
+%Name_VID_14D5_PID_0115% = Install_VID_14D5_PID_0115, USB\VID_14D5&PID_0115&MI_01
+%Name_VID_14D5_PID_011B% = Install_VID_14D5_PID_011B, USB\VID_14D5&PID_011B&MI_01
+%Name_VID_14D5_PID_011C% = Install_VID_14D5_PID_011C, USB\VID_14D5&PID_011C&MI_01
+%Name_VID_14D5_PID_011D% = Install_VID_14D5_PID_011D, USB\VID_14D5&PID_011D&MI_01
+
+[DeviceInstall.NTamd64]
+%Name_VID_14D5_PID_0036% = Install_VID_14D5_PID_0036, USB\VID_14D5&PID_0036&MI_01
+%Name_VID_14D5_PID_003C% = Install_VID_14D5_PID_003C, USB\VID_14D5&PID_003C&MI_01
+%Name_VID_14D5_PID_003D% = Install_VID_14D5_PID_003D, USB\VID_14D5&PID_003D&MI_01
+%Name_VID_14D5_PID_0042% = Install_VID_14D5_PID_0042, USB\VID_14D5&PID_0042&MI_01
+%Name_VID_14D5_PID_0045% = Install_VID_14D5_PID_0045, USB\VID_14D5&PID_0045&MI_01
+%Name_VID_14D5_PID_0046% = Install_VID_14D5_PID_0046, USB\VID_14D5&PID_0046&MI_01
+%Name_VID_14D5_PID_0047% = Install_VID_14D5_PID_0047, USB\VID_14D5&PID_0047&MI_01
+%Name_VID_14D5_PID_0048% = Install_VID_14D5_PID_0048, USB\VID_14D5&PID_0048&MI_01
+%Name_VID_14D5_PID_0049% = Install_VID_14D5_PID_0049, USB\VID_14D5&PID_0049&MI_01
+%Name_VID_14D5_PID_004A% = Install_VID_14D5_PID_004A, USB\VID_14D5&PID_004A&MI_01
+%Name_VID_14D5_PID_004B% = Install_VID_14D5_PID_004B, USB\VID_14D5&PID_004B&MI_01
+%Name_VID_14D5_PID_004C% = Install_VID_14D5_PID_004C, USB\VID_14D5&PID_004C&MI_01
+%Name_VID_14D5_PID_004D% = Install_VID_14D5_PID_004D, USB\VID_14D5&PID_004D&MI_01
+%Name_VID_14D5_PID_004E% = Install_VID_14D5_PID_004E, USB\VID_14D5&PID_004E&MI_01
+%Name_VID_14D5_PID_004F% = Install_VID_14D5_PID_004F, USB\VID_14D5&PID_004F&MI_01
+%Name_VID_14D5_PID_0050% = Install_VID_14D5_PID_0050, USB\VID_14D5&PID_0050&MI_01
+%Name_VID_14D5_PID_0051% = Install_VID_14D5_PID_0051, USB\VID_14D5&PID_0051&MI_01
+%Name_VID_14D5_PID_0052% = Install_VID_14D5_PID_0052, USB\VID_14D5&PID_0052&MI_01
+%Name_VID_14D5_PID_0053% = Install_VID_14D5_PID_0053, USB\VID_14D5&PID_0053&MI_01
+%Name_VID_14D5_PID_0054% = Install_VID_14D5_PID_0054, USB\VID_14D5&PID_0054&MI_01
+%Name_VID_14D5_PID_0055% = Install_VID_14D5_PID_0055, USB\VID_14D5&PID_0055&MI_01
+%Name_VID_14D5_PID_0112% = Install_VID_14D5_PID_0112, USB\VID_14D5&PID_0112&MI_01
+%Name_VID_14D5_PID_0113% = Install_VID_14D5_PID_0113, USB\VID_14D5&PID_0113&MI_01
+%Name_VID_14D5_PID_0114% = Install_VID_14D5_PID_0114, USB\VID_14D5&PID_0114&MI_01
+%Name_VID_14D5_PID_0115% = Install_VID_14D5_PID_0115, USB\VID_14D5&PID_0115&MI_01
+%Name_VID_14D5_PID_011B% = Install_VID_14D5_PID_011B, USB\VID_14D5&PID_011B&MI_01
+%Name_VID_14D5_PID_011C% = Install_VID_14D5_PID_011C, USB\VID_14D5&PID_011C&MI_01
+%Name_VID_14D5_PID_011D% = Install_VID_14D5_PID_011D, USB\VID_14D5&PID_011D&MI_01
+
+; =================== Installation ===================
+
+[WinUsb_Install]
+KmdfLibraryVersion=1.11
+
+;
+; ETC FDU
+;
+[Install_VID_14D5_PID_0036]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0036.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0036.HW]
+AddReg=AddReg_VID_14D5_PID_0036
+[AddReg_VID_14D5_PID_0036]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{E2E36BFA-CE53-40CA-98C8-76FD666C2257}"
+[Install_VID_14D5_PID_0036.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Motor Fader Wing
+;
+[Install_VID_14D5_PID_003C]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_003C.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_003C.HW]
+AddReg=AddReg_VID_14D5_PID_003C
+[AddReg_VID_14D5_PID_003C]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{C35EA804-58D8-463A-A08E-390B7079B909}"
+[Install_VID_14D5_PID_003C.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Eos Motor Fader Wing
+;
+[Install_VID_14D5_PID_003D]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_003D.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_003D.HW]
+AddReg=AddReg_VID_14D5_PID_003D
+[AddReg_VID_14D5_PID_003D]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{F8BDCB82-31E5-4EC9-BB73-A6BD46B79D33}"
+[Install_VID_14D5_PID_003D.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Standard Fader Wing
+;
+[Install_VID_14D5_PID_0042]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0042.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0042.HW]
+AddReg=AddReg_VID_14D5_PID_0042
+[AddReg_VID_14D5_PID_0042]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{8DFA500F-D162-4C4B-AA73-760B01962F22}"
+[Install_VID_14D5_PID_0042.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Motor Faders
+;
+[Install_VID_14D5_PID_0045]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0045.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0045.HW]
+AddReg=AddReg_VID_14D5_PID_0045
+[AddReg_VID_14D5_PID_0045]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{4414C725-4386-48E0-9182-32EAB556E0A1}"
+[Install_VID_14D5_PID_0045.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Haptic Encoders
+;
+[Install_VID_14D5_PID_0046]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0046.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0046.HW]
+AddReg=AddReg_VID_14D5_PID_0046
+[AddReg_VID_14D5_PID_0046]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{D3EC7709-D66F-495A-AB5A-75319FF2B1A4}"
+[Install_VID_14D5_PID_0046.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Intelligent Power
+;
+[Install_VID_14D5_PID_0047]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0047.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0047.HW]
+AddReg=AddReg_VID_14D5_PID_0047
+[AddReg_VID_14D5_PID_0047]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{F9AD20C1-C13A-4B3A-9D79-F0BD9E65009A}"
+[Install_VID_14D5_PID_0047.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Main Playback
+;
+[Install_VID_14D5_PID_0048]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0048.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0048.HW]
+AddReg=AddReg_VID_14D5_PID_0048
+[AddReg_VID_14D5_PID_0048]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{8D8377D2-A3F7-4E9A-A5B5-275C523D065E}"
+[Install_VID_14D5_PID_0048.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Face Panel
+;
+[Install_VID_14D5_PID_0049]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0049.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0049.HW]
+AddReg=AddReg_VID_14D5_PID_0049
+[AddReg_VID_14D5_PID_0049]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{130A3A1B-CE03-4F1D-810B-99ED04E8EBC1}"
+[Install_VID_14D5_PID_0049.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Rackmount Display
+;
+[Install_VID_14D5_PID_004A]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_004A.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_004A.HW]
+AddReg=AddReg_VID_14D5_PID_004A
+[AddReg_VID_14D5_PID_004A]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{BAF97878-FED6-47B8-BB1F-B73ED1943DFE}"
+[Install_VID_14D5_PID_004A.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Haptic Encoders IMX
+;
+[Install_VID_14D5_PID_004B]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_004B.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_004B.HW]
+AddReg=AddReg_VID_14D5_PID_004B
+[AddReg_VID_14D5_PID_004B]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{4903CACD-B1AC-423F-9502-89E51A4DAF11}"
+[Install_VID_14D5_PID_004B.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Intelligent Power IMX
+;
+[Install_VID_14D5_PID_004C]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_004C.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_004C.HW]
+AddReg=AddReg_VID_14D5_PID_004C
+[AddReg_VID_14D5_PID_004C]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{69D5C0B7-20C7-48ED-BF6F-2C4A4D92D17A}"
+[Install_VID_14D5_PID_004C.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Apex Main Playback IMX
+;
+[Install_VID_14D5_PID_004D]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_004D.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_004D.HW]
+AddReg=AddReg_VID_14D5_PID_004D
+[AddReg_VID_14D5_PID_004D]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{BF636CAA-CF4E-43B7-AAE4-64BCEB206DCB}"
+[Install_VID_14D5_PID_004D.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Eos Main Playback IMX
+;
+[Install_VID_14D5_PID_004E]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_004E.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_004E.HW]
+AddReg=AddReg_VID_14D5_PID_004E
+[AddReg_VID_14D5_PID_004E]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{64FC2285-D100-440F-917F-23302E5AF3F4}"
+[Install_VID_14D5_PID_004E.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Eos Main Playback Motorized IMX
+;
+[Install_VID_14D5_PID_004F]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_004F.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_004F.HW]
+AddReg=AddReg_VID_14D5_PID_004F
+[AddReg_VID_14D5_PID_004F]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{5029254F-C385-45EE-BD71-9EC34DB93C25}"
+[Install_VID_14D5_PID_004F.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Eos Intelligent Power IMX
+;
+[Install_VID_14D5_PID_0050]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0050.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0050.HW]
+AddReg=AddReg_VID_14D5_PID_0050
+[AddReg_VID_14D5_PID_0050]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{1E18487A-2614-483C-88B2-78BAA290E634}"
+[Install_VID_14D5_PID_0050.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Eos 6x2 Buttons IMX
+;
+[Install_VID_14D5_PID_0051]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0051.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0051.HW]
+AddReg=AddReg_VID_14D5_PID_0051
+[AddReg_VID_14D5_PID_0051]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{ECFB1E72-1DF6-46B1-B0D4-78DAF32CEF91}"
+[Install_VID_14D5_PID_0051.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Eos Face Panel IMX
+;
+[Install_VID_14D5_PID_0052]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0052.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0052.HW]
+AddReg=AddReg_VID_14D5_PID_0052
+[AddReg_VID_14D5_PID_0052]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{B2433E8D-6124-4E83-AF84-AD132C6DE496}"
+[Install_VID_14D5_PID_0052.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Standard Fader Wing IMX
+;
+[Install_VID_14D5_PID_0053]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0053.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0053.HW]
+AddReg=AddReg_VID_14D5_PID_0053
+[AddReg_VID_14D5_PID_0053]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{BB35E01B-7BD6-4740-B4EA-0F55EEB35C66}"
+[Install_VID_14D5_PID_0053.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Eos 6x1 Buttons IMX
+;
+[Install_VID_14D5_PID_0054]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0054.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0054.HW]
+AddReg=AddReg_VID_14D5_PID_0054
+[AddReg_VID_14D5_PID_0054]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{40B275F8-C920-4A56-8EAB-41311476152D}"
+[Install_VID_14D5_PID_0054.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Element 2 Faders IMX
+;
+[Install_VID_14D5_PID_0055]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0055.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0055.HW]
+AddReg=AddReg_VID_14D5_PID_0055
+[AddReg_VID_14D5_PID_0055]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{A914CDA8-C596-4892-984C-1BBD6D463028}"
+[Install_VID_14D5_PID_0055.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Gadget
+;
+[Install_VID_14D5_PID_0112]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0112.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0112.HW]
+AddReg=AddReg_VID_14D5_PID_0112
+[AddReg_VID_14D5_PID_0112]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{9F38BE94-CFBF-41F9-9495-4F0A010EF663}"
+[Install_VID_14D5_PID_0112.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Console I/O HS
+;
+[Install_VID_14D5_PID_0113]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0113.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0113.HW]
+AddReg=AddReg_VID_14D5_PID_0113
+[AddReg_VID_14D5_PID_0113]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{8A9526E6-46D4-4F74-AFFA-1A8AAEB537DC}"
+[Install_VID_14D5_PID_0113.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Gadget HS
+;
+[Install_VID_14D5_PID_0114]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0114.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0114.HW]
+AddReg=AddReg_VID_14D5_PID_0114
+[AddReg_VID_14D5_PID_0114]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{FA8D27C5-E70F-4ADE-A86A-F057227056CB}"
+[Install_VID_14D5_PID_0114.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Console I/O 4 Port HS
+;
+[Install_VID_14D5_PID_0115]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_0115.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_0115.HW]
+AddReg=AddReg_VID_14D5_PID_0115
+[AddReg_VID_14D5_PID_0115]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{A0C805C1-9F1A-4C16-92C0-F5DA17C8C3EA}"
+[Install_VID_14D5_PID_0115.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Console I/O HS IMX
+;
+[Install_VID_14D5_PID_011B]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_011B.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_011B.HW]
+AddReg=AddReg_VID_14D5_PID_011B
+[AddReg_VID_14D5_PID_011B]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{6987A07B-1E16-4D21-8E15-78A5F4253051}"
+[Install_VID_14D5_PID_011B.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Gadget HS IMX
+;
+[Install_VID_14D5_PID_011C]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_011C.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_011C.HW]
+AddReg=AddReg_VID_14D5_PID_011C
+[AddReg_VID_14D5_PID_011C]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{FAAF4041-11F6-4850-B5A1-4A9DCD54B3E6}"
+[Install_VID_14D5_PID_011C.Wdf]
+KmdfService=WINUSB, WinUsb_Install
+
+;
+; ETC Console I/O 4 Port HS IMX
+;
+[Install_VID_14D5_PID_011D]
+Include = winusb.inf
+Needs   = WINUSB.NT
+[Install_VID_14D5_PID_011D.Services]
+Include =winusb.inf
+Needs   = WINUSB.NT.Services
+[Install_VID_14D5_PID_011D.HW]
+AddReg=AddReg_VID_14D5_PID_011D
+[AddReg_VID_14D5_PID_011D]
+HKR,,DeviceInterfaceGUIDs,0x10000,"{0BE123F9-93B6-406B-97BB-8CCB844109EA}"
+[Install_VID_14D5_PID_011D.Wdf]
+KmdfService=WINUSB, WinUsb_Install

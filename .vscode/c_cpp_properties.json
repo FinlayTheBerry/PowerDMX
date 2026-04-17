@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Musl CPP Properties",
+            "includePath": [
+                "${workspaceFolder}/src/**/*",
+                "${workspaceFolder}/lib/libusb/include"
+            ],
+            "compilerPath": "${workspaceFolder}/musl/bin/g++",
+            "cStandard": "c23",
+            "cppStandard": "c++23",
+            "intelliSenseMode": "linux-gcc-x64",
+            "defines": [
+                "LINUX"
+            ]
+        }
+    ],
+    "version": 4
+}
