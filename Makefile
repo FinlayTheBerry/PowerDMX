@@ -1,6 +1,11 @@
 UNAME := $(shell uname -s)
 
-ifeq ($(UNAME), Darwin)
+ifneq ($(filter MINGW%,$(UNAME)),)
+	CC := $(shell which gcc)
+    CXX := $(shell which g++)
+	RELEASE_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
+	DEBUG_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -g -O0 -Wall -Wextra -Werror # -Wpedantic
+else ifeq ($(UNAME), Darwin)
 	CC := $(shell which clang)
     CXX := $(shell which clang++)
 	RELEASE_CFLAGS := -framework CoreFoundation -framework IOKit -framework Security -lobjc -Wno-error=unused-command-line-argument -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
@@ -8,8 +13,8 @@ ifeq ($(UNAME), Darwin)
 else
 	CC := $(abspath ./musl/bin/gcc)
     CXX := $(abspath ./musl/bin/g++)
-	RELEASE_CFLAGS := -static -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
-	DEBUG_CFLAGS := -static -std=c++23 -g -O0 -Wall -Wextra -Werror # -Wpedantic
+	RELEASE_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
+	DEBUG_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -g -O0 -Wall -Wextra -Werror # -Wpedantic
 endif
 
 SRCS := $(wildcard ./src/*.cpp)
@@ -20,7 +25,11 @@ release: ./bin/PowerDMX
 ./bin/PowerDMX: $(RELEASE_OBJS) | ./lib/libusb ./musl
 	@mkdir -p ./bin
 	$(CXX) $(RELEASE_CFLAGS) -o $@ $^ ./lib/libusb/lib/libusb-1.0.a
+ifneq ($(filter MINGW%,$(UNAME)),)
+	@strip $@.exe
+else
 	@strip $@
+endif
 
 debug: ./bin/PowerDMX_Debug
 ./bin/PowerDMX_Debug: $(DEBUG_OBJS) | ./lib/libusb ./musl
@@ -42,9 +51,12 @@ debug: ./bin/PowerDMX_Debug
 	@git clone https://github.com/libusb/libusb.git ./lib/libusb_git 1>/dev/null 2>&1
 	@echo Building LibUsb..
 	@cd ./lib/libusb_git && ./bootstrap.sh 1>/dev/null 2>&1
-ifeq ($(UNAME), Darwin)
-	cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" ./configure --enable-static --disable-shared --prefix='$(abspath ./lib/libusb)'
-	cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" make -j$(shell sysctl -n hw.logicalcpu)
+ifneq ($(filter MINGW%,$(UNAME)),)
+	@cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" ./configure --enable-static --disable-shared --prefix='$(abspath ./lib/libusb)' 1>/dev/null 2>&1
+	@cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" make -j$(shell nproc) 1>/dev/null 2>&1
+else ifeq ($(UNAME), Darwin)
+	@cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" ./configure --enable-static --disable-shared --prefix='$(abspath ./lib/libusb)' 1>/dev/null 2>&1
+	@cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" make -j$(shell sysctl -n hw.logicalcpu) 1>/dev/null 2>&1
 else
 	@cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" ./configure --host=x86_64-linux-musl --enable-static --disable-shared --disable-udev --prefix='$(abspath ./lib/libusb)' 1>/dev/null 2>&1
 	@cd ./lib/libusb_git && CC="$(CC)" CXX="$(CXX)" CFLAGS="" make -j$(shell nproc) 1>/dev/null 2>&1
@@ -55,7 +67,9 @@ endif
 	@rm -f ./lib/libusb/lib//libusb-1.0.la 1>/dev/null 2>&1
 
 ./musl:
-ifeq ($(UNAME), Darwin)
+ifneq ($(filter MINGW%,$(UNAME)),)
+	@mkdir -p ./musl
+else ifeq ($(UNAME), Darwin)
 	@mkdir -p ./musl
 else
 	@echo 'Downloading Musl...'
