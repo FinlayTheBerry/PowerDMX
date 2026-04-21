@@ -45,6 +45,7 @@ client.Enum()
 client.Connect(0)
 animationTimer = 0
 lastTime = 0
+scale = 255
 while True:
     timeNow = time.time()
     deltaTime = timeNow - lastTime
@@ -52,6 +53,6 @@ while True:
     lastTime = timeNow
     animationTimer = (animationTimer + deltaTime) % 2.0
     R, G, B = colorsys.hsv_to_rgb(animationTimer / 2.0, 1.0, 1.0)
-    client.SetDmxState(0, 0, [ 255, int(R * 255), int(G * 255), int(B * 255) ])
+    client.SetDmxState(0, 0, [ scale, int(R * scale), int(G * scale), int(B * scale) ])
     timeAfterRender = time.time()
     time.sleep(1 / 100 - (timeAfterRender - timeNow))
