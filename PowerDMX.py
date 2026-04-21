@@ -1,37 +1,57 @@
 import subprocess
+import time
 import os
+import colorsys
 
-class CLibraryWrapper:
-    def __init__(self, executable_path="./my_c_program"):
-        # Start the process
-        self.process = subprocess.Popen(
-            [executable_path],
-            stdin=subprocess.PIPE,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-            text=True,     # Handles encoding/decoding to strings automatically
-            bufsize=1      # Line buffered
-        )
+class PowerDMXClient:
+    def __init__(self):
+        binPath = "./bin/PowerDMX"
+        if not os.path.isfile("./bin/PowerDMX"):
+            binPath = "./bin/PowerDMX.exe"
+        self.WORKER = subprocess.Popen(binPath, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, shell=True, text=True)
+    def _SendCommand(self, command):
+        self.WORKER.stdin.write(command + "\n")
+        self.WORKER.stdin.flush()
+        response = self.WORKER.stdout.readline().rstrip("\n")
+        output, error = response.split(";")
+        if error != "":
+            raise Exception(error)
+        else:
+            return output
+    def Enum(self):
+        return int(self._SendCommand("Enum"))
+    def Connect(self, index):
+        return int(self._SendCommand(f"Connect;{int(index)}"))
+    def Disconnect(self, connectionId):
+        self._SendCommand(f"Disconnect;{int(connectionId)}")
+        return
+    def GetType(self, connectionId):
+        return int(self._SendCommand(f"GetType;{int(connectionId)}"))
+    def GetSerialNumber(self, connectionId):
+        return int(self._SendCommand(f"GetSerialNumber;{int(connectionId)}"))
+    def SetDmxState(self, connectionId, universe, dmxState):
+        self._SendCommand(f"SetDmxState;{int(connectionId)};{int(universe)};{":".join([ f"{b:02x}" for b in bytes(dmxState) ])}")
+        return
+    def __del__(self):
+        if self.WORKER:
+            self.WORKER.terminate()
+            self.WORKER.wait()
+            print("PowerDMX killed.")
 
-    def _send_command(self, command: str) -> str:
-        """Internal helper to handle the I/O."""
-        if self.process.poll() is not None:
-            raise ChildProcessError("The C executable has terminated.")
 
-        # Ensure the command ends with a newline
-        self.process.stdin.write(f"{command}\n")
-        self.process.stdin.flush()
 
-        # Read exactly one line back
-        response = self.process.stdout.readline()
-        return response.strip()
-
-    def get_status(self, item_id: int):
-        """Example library function."""
-        return self._send_command(f"GET_STATUS {item_id}")
-
-    def close(self):
-        """Clean up the process."""
-        self.process.stdin.close()
-        self.process.terminate()
-        self.process.wait()
+client = PowerDMXClient()
+client.Enum()
+client.Connect(0)
+animationTimer = 0
+lastTime = 0
+while True:
+    timeNow = time.time()
+    deltaTime = timeNow - lastTime
+    print(f"TPF: {10000000 * (deltaTime)} FPS: {1.0 / (deltaTime)}")
+    lastTime = timeNow
+    animationTimer = (animationTimer + deltaTime) % 2.0
+    R, G, B = colorsys.hsv_to_rgb(animationTimer / 2.0, 1.0, 1.0)
+    client.SetDmxState(0, 0, [ 255, int(R * 255), int(G * 255), int(B * 255) ])
+    timeAfterRender = time.time()
+    time.sleep(1 / 100 - (timeAfterRender - timeNow))
