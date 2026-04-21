@@ -22,7 +22,7 @@ static constexpr uint16_t USB_VID_ETC = 0x14D5;
 static constexpr uint16_t USB_PID_ETC_Gadget = 0x0112;
 static constexpr uint16_t USB_PID_ETC_Gadget_2 = 0x0114;
 static constexpr uint16_t USB_PID_ETC_Gadget_2_CPU2 = 0x011C;
-static constexpr uint8_t USB_HID_Interface_Number = 0x00;
+static constexpr uint8_t __attribute__((unused)) USB_HID_Interface_Number = 0x00;
 static constexpr uint8_t USB_Bulk_Interface_Number = 0x01;
 static constexpr uint8_t __attribute__((unused)) USB_HID_Out_Endpoint_Number = 0x01;
 static constexpr uint8_t __attribute__((unused)) USB_HID_In_Endpoint_Number = 0x81;
@@ -153,6 +153,7 @@ uint32_t PowerDmx::Connect(uint32_t index)
             throw std::runtime_error(std::string("libusb_detach_kernel_driver: ") + libusb_error_name(errorCode));
         }
     }
+    /*
     if (libusb_kernel_driver_active(connection.libusbDeviceHandle, USB_HID_Interface_Number) == 1)
     {
         errorCode = libusb_detach_kernel_driver(connection.libusbDeviceHandle, USB_HID_Interface_Number);
@@ -162,6 +163,7 @@ uint32_t PowerDmx::Connect(uint32_t index)
             throw std::runtime_error(std::string("libusb_detach_kernel_driver: ") + libusb_error_name(errorCode));
         }
     }
+    */
 
     errorCode = libusb_claim_interface(connection.libusbDeviceHandle, USB_Bulk_Interface_Number);
     if (errorCode != 0)
@@ -178,6 +180,7 @@ uint32_t PowerDmx::Connect(uint32_t index)
             throw std::runtime_error(std::string("libusb_claim_interface: ") + libusb_error_name(errorCode));
         }
     }
+    /*
     errorCode = libusb_claim_interface(connection.libusbDeviceHandle, USB_HID_Interface_Number);
     if (errorCode != 0)
     {
@@ -193,6 +196,7 @@ uint32_t PowerDmx::Connect(uint32_t index)
             throw std::runtime_error(std::string("libusb_claim_interface: ") + libusb_error_name(errorCode));
         }
     }
+    */
 
     connection.libusbDevice = libusb_ref_device(interface.libusbDevice);
     connection.type = interface.type;
