@@ -18,9 +18,24 @@ To download ucrtbase.dll on older versions of Windows go [here](https://support.
 If you don't already have the ETC EOS Console software installed you will need to manually load the ETC WinUSB drivers.  
 This is suprisingly easy. Just navigate to `C:\msys64\home\finlaytheberry\PowerDMX\assets` in file explorer then right click on `etc_winusb.inf` and press Install.  
 
+# Windows Build Instructions
 To build start by downloading MSYS2 [here](https://www.msys2.org/).  
 Then launch the "MSYS2 UCRT64" terminal.  
 Run: `pacman -Syu git mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-autotools --noconfirm`.  
+Run: `git clone https://github.com/FinlayTheBerry/PowerDMX.git ~/PowerDMX`.  
+Run: `cd ~/PowerDMX && make`.  
+The build files are `~/PowerDMX/PowerDMX.py` and `~/PowerDMX/bin/PowerDMX.exe`.  
+
+# macOS Setup Instructions
+This software is supported on all Intel based x86_64 Macs.  
+This software should also run on Apple silicone macs through Rosetta 2.  
+Very old versions of macOS may not work. If unsupported consider using OpenCore.  
+No special setup is required. Just download PowerDMX and run it.
+
+# macOS Build Instructions
+First you will need to install install xcode. If your mac is too old consider using OpenCore.  
+You will also need several pieces of software which can be easily installed with homebrew.  
+Run: `brew install autoconf automake libtool`.  
 Run: `git clone https://github.com/FinlayTheBerry/PowerDMX.git ~/PowerDMX`.  
 Run: `cd ~/PowerDMX && make`.  
 The build files are `~/PowerDMX/PowerDMX.py` and `~/PowerDMX/bin/PowerDMX.exe`.  
