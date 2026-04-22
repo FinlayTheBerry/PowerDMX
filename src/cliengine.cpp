@@ -10,6 +10,9 @@ std::string CliEngine::ReadLine() noexcept
 {
     std::string output;
     std::getline(std::cin, output);
+    if (!output.empty() && output.back() == '\r') {
+        output.pop_back();
+    }
     return output;
 }
 std::vector<std::string> CliEngine::Split(const std::string &input, const std::string &delimiter) noexcept

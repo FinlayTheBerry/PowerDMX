@@ -11,10 +11,16 @@ Download [the latest release from GitHub](https://github.com/FinlayTheBerry/Powe
 PowerDMX.Gadgets[0].SetDmxState(0, 0, b"FF")
 
 
-Download:
-Msys2
-Open MSYS2 UCRT64
-Run pacman -Syu git mingw-w64-ucrt-x86_64-toolchain
-Run git clone git@github.com:FinlayTheBerry/PowerDMX.git ./PowerDMX
-Run cd ./PowerDMX
-Run make
+# Windows Setup Instructions
+This software is supported on all versions of Windows with ucrtbase.dll.  
+ucrtbase.dll comes with Windows 10 and newer and can be installed after the fact on Windows Vista and newer.  
+To download ucrtbase.dll on older versions of Windows go [here](https://support.microsoft.com/en-us/topic/update-for-universal-c-runtime-in-windows-c0514201-7fe6-95a3-b0a5-287930f3560c).  
+If you don't already have the ETC EOS Console software installed you will need to manually load the ETC WinUSB drivers.  
+This is suprisingly easy. Just navigate to `C:\msys64\home\finlaytheberry\PowerDMX\assets` in file explorer then right click on `etc_winusb.inf` and press Install.  
+
+To build start by downloading MSYS2 [here](https://www.msys2.org/).  
+Then launch the "MSYS2 UCRT64" terminal.  
+Run: `pacman -Syu git mingw-w64-ucrt-x86_64-toolchain mingw-w64-ucrt-x86_64-autotools --noconfirm`.  
+Run: `git clone https://github.com/FinlayTheBerry/PowerDMX.git ~/PowerDMX`.  
+Run: `cd ~/PowerDMX && make`.  
+The build files are `~/PowerDMX/PowerDMX.py` and `~/PowerDMX/bin/PowerDMX.exe`.  

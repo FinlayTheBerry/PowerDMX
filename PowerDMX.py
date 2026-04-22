@@ -1,19 +1,20 @@
 import subprocess
 import time
 import os
+import platform
 import colorsys
 
 class PowerDMXClient:
     def __init__(self):
         binPath = "./bin/PowerDMX"
-        if not os.path.isfile("./bin/PowerDMX"):
+        if platform.system() == "Windows":
             binPath = "./bin/PowerDMX.exe"
-        self.WORKER = subprocess.Popen(binPath, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, shell=True, text=True)
+        self.WORKER = subprocess.Popen(binPath, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, text=True)
     def _SendCommand(self, command):
-        self.WORKER.stdin.write(command + "\n")
+        self.WORKER.stdin.write(command + os.linesep)
         self.WORKER.stdin.flush()
-        response = self.WORKER.stdout.readline().rstrip("\n")
-        output, error = response.split(";")
+        response = self.WORKER.stdout.readline()
+        output, error = response.rstrip(os.linesep).split(";")
         if error != "":
             raise Exception(error)
         else:
