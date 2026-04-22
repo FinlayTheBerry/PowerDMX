@@ -1,22 +1,12 @@
-#!/bin/sh
-
-# code 1 sudo authentication failure.
-# code 127 pkexec authentication failure.
-# code 128 udev not installed.
-# code 129 no PrivEsc method found.
+#!/bin/sh -e
 
 command -v udevadm >/dev/null 2>&1 || {
-    exit 128
+    printf "\033[31mError: Udevadm could not be found. A system with udev is required to run this script.\033[0m\n"
+    exit 1
 }
 
 if [ "$(id -u)" -ne 0 ]; then
-    if command -v pkexec >/dev/null 2>&1; then
-        exec pkexec "$0" "$@" >/dev/null 2>&1
-    elif command -v sudo >/dev/null 2>&1; then
-        exec sudo "$0" "$@" 2>/dev/null
-    else
-        exit 129
-    fi
+    printf "\033[33mWarning: Root is most likely required to install udev rules. If this fails try sudo ./powercues_udev_setup.sh\033[0m\n"
 fi
 
 cat << EOF >/usr/lib/udev/rules.d/99-powercues.rules
@@ -36,3 +26,5 @@ udevadm control --reload
 udevadm trigger --subsystem-match=usb --attr-match=idVendor=14d5 --attr-match=idProduct=0112
 udevadm trigger --subsystem-match=usb --attr-match=idVendor=14d5 --attr-match=idProduct=0114
 udevadm trigger --subsystem-match=usb --attr-match=idVendor=14d5 --attr-match=idProduct=011c
+
+printf "Done! New rules installed to /usr/lib/udev/rules.d/99-powercues.rules and udev reloaded.\n"

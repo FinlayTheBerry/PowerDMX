@@ -1,14 +1,12 @@
 import subprocess
-import time
 import os
 import platform
-import colorsys
 
 class PowerDMXClient:
     def __init__(self):
-        binPath = "./bin/PowerDMX"
+        binPath = "./PowerDMX"
         if platform.system() == "Windows":
-            binPath = "./bin/PowerDMX.exe"
+            binPath = "./PowerDMX.exe"
         self.WORKER = subprocess.Popen(binPath, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE, text=True)
     def _SendCommand(self, command):
         self.WORKER.stdin.write(command + os.linesep)
@@ -37,23 +35,3 @@ class PowerDMXClient:
         if self.WORKER:
             self.WORKER.terminate()
             self.WORKER.wait()
-            print("PowerDMX killed.")
-
-
-
-client = PowerDMXClient()
-client.Enum()
-client.Connect(0)
-animationTimer = 0
-lastTime = 0
-scale = 255
-while True:
-    timeNow = time.time()
-    deltaTime = timeNow - lastTime
-    print(f"TPF: {10000000 * (deltaTime)} FPS: {1.0 / (deltaTime)}")
-    lastTime = timeNow
-    animationTimer = (animationTimer + deltaTime) % 2.0
-    R, G, B = colorsys.hsv_to_rgb(animationTimer / 2.0, 1.0, 1.0)
-    client.SetDmxState(0, 0, [ scale, int(R * scale), int(G * scale), int(B * scale) ])
-    timeAfterRender = time.time()
-    time.sleep(1 / 100 - (timeAfterRender - timeNow))
