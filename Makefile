@@ -5,16 +5,19 @@ ifneq ($(filter MINGW%,$(UNAME)),)
     CXX := $(shell which g++)
 	RELEASE_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
 	DEBUG_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -g -O0 -Wall -Wextra -Werror # -Wpedantic
+	LINK_FLAGS :=
 else ifeq ($(UNAME), Darwin)
 	CC := $(shell which clang)
     CXX := $(shell which clang++)
-	RELEASE_CFLAGS := -framework CoreFoundation -framework IOKit -framework Security -lobjc -Wno-error=unused-command-line-argument -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
-	DEBUG_CFLAGS := -framework CoreFoundation -framework IOKit -framework Security -lobjc -Wno-error=unused-command-line-argument -std=c++23 -g -O0 -Wall -Wextra -Werror # -Wpedantic
+	RELEASE_CFLAGS := -Wno-error=unused-command-line-argument -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
+	DEBUG_CFLAGS := -Wno-error=unused-command-line-argument -std=c++23 -g -O0 -Wall -Wextra -Werror # -Wpedantic
+	LINK_FLAGS := -framework CoreFoundation -framework IOKit -framework Security -lobjc
 else
 	CC := $(abspath ./musl/bin/gcc)
     CXX := $(abspath ./musl/bin/g++)
 	RELEASE_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -O3 -Wall -Wextra -Werror # -Wpedantic
 	DEBUG_CFLAGS := -static -static-libgcc -static-libstdc++ -std=c++23 -g -O0 -Wall -Wextra -Werror # -Wpedantic
+	LINK_FLAGS :=
 endif
 
 SRCS := $(wildcard ./src/*.cpp)
@@ -24,7 +27,7 @@ DEBUG_OBJS := $(SRCS:./src/%.cpp=./obj/debug/%.o)
 release: ./bin/PowerDMX
 ./bin/PowerDMX: $(RELEASE_OBJS) | ./lib/libusb ./musl
 	@mkdir -p ./bin
-	$(CXX) $(RELEASE_CFLAGS) -o $@ $^ ./lib/libusb/lib/libusb-1.0.a
+	$(CXX) $(RELEASE_CFLAGS) $(LINK_FLAGS) -o $@ $^ ./lib/libusb/lib/libusb-1.0.a
 ifneq ($(filter MINGW%,$(UNAME)),)
 	@strip $@.exe
 else
@@ -34,7 +37,7 @@ endif
 debug: ./bin/PowerDMX_Debug
 ./bin/PowerDMX_Debug: $(DEBUG_OBJS) | ./lib/libusb ./musl
 	@mkdir -p ./bin
-	$(CXX) $(DEBUG_CFLAGS) -o $@ $^ ./lib/libusb/lib/libusb-1.0.a
+	$(CXX) $(DEBUG_CFLAGS) $(LINK_FLAGS) -o $@ $^ ./lib/libusb/lib/libusb-1.0.a
 
 ./obj/release/%.o: ./src/%.cpp | ./lib/libusb ./musl
 	@mkdir -p ./obj/release

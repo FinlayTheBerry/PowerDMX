@@ -38,4 +38,8 @@ You will also need several pieces of software which can be easily installed with
 Run: `brew install autoconf automake libtool`.  
 Run: `git clone https://github.com/FinlayTheBerry/PowerDMX.git ~/PowerDMX`.  
 Run: `cd ~/PowerDMX && make`.  
-The build files are `~/PowerDMX/PowerDMX.py` and `~/PowerDMX/bin/PowerDMX.exe`.  
+The build files are `~/PowerDMX/PowerDMX.py` and `~/PowerDMX/bin/PowerDMX`.  
+
+# Linux Setup Instructions
+
+# Linux Build Instructions
