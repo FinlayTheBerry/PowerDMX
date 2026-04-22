@@ -6,7 +6,7 @@ The core of PowerDMX is a standalone C++ binary which can be sent commands via t
 PowerDMX also offers a python library which wraps this binary in a python friendly interface while marshaling commands to the same C++ binary internally.  
 
 # How To Use
-Download [the latest release from GitHub](https://github.com/FinlayTheBerry/PowerDMX/releases/latest) and download the version for your operating system.  
+First download [the latest release from GitHub](https://github.com/FinlayTheBerry/PowerDMX/releases/latest) and ensure you get the version for your operating system.  
 Extract the contents and you will find the PowerDMX folder. Place this folder next to your `.py` script.  
 Remember to add `import PowerDMX`. Then you can interact with your ETC Gadget using the provided library.  
 Here is an example of connecting to an ETC Gadget and setting all 512 addresses at full.  
